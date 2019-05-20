@@ -4,7 +4,7 @@
  * 编译器:           		JDK1.8
  */
 
-package cmo.ljj.dlock.zookeeper;
+package com.ljj.dlock.zookeeper;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -23,9 +23,9 @@ import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 
-import cmo.ljj.dlock.DLockInfo;
-import cmo.ljj.dlock.IDLock;
-import cmo.ljj.dlock.LockingException;
+import com.ljj.dlock.DLockInfo;
+import com.ljj.dlock.IDLock;
+import com.ljj.dlock.LockingException;
 
 /**
  * 采用Zookeeper实现分布式锁

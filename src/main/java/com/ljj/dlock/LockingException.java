@@ -4,7 +4,7 @@
  * 编译器:           		JDK1.8
  */
 
-package cmo.ljj.dlock;
+package com.ljj.dlock;
 
 /**
  * 分布锁异常

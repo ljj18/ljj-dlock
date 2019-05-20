@@ -3,7 +3,7 @@
  * 版权所有@ 2019-2020  无锡爱超信息技术有限公司
  * 编译器:                 JDK1.8
  */
-package cmo.ljj.dlock;
+package com.ljj.dlock;
 
 import java.time.LocalDateTime;
 

@@ -8,7 +8,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
-import cmo.ljj.dlock.zookeeper.DLockZKImpl;
+import com.ljj.dlock.DLockInfo;
+import com.ljj.dlock.IDLock;
+import com.ljj.dlock.zookeeper.DLockZKImpl;
+
 import junit.framework.TestCase;
 
 /**
