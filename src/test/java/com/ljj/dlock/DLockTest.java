@@ -1,5 +1,5 @@
 
-package cmo.ljj.dlock;
+package com.ljj.dlock;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
