@@ -85,8 +85,6 @@ public class DLockRedisImpl implements IDLock {
         this.port = port;
         this.password = password;
         this.lockName = lockName;
-        
-        
         init();
     }
 
