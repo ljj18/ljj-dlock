@@ -26,11 +26,10 @@ public class DLockRedisTest extends TestCase {
             threadPool.execute( new Runnable(){
                 @ Override
                 public void run() {
-                    IDLock dlockImpl = new DLockRedisImpl("10.50.22.26", 13379, "ichao_redis", "redislock");
+                    IDLock dlockImpl = new DLockRedisImpl("47.100.40.127", 13379, "ichao_redis", "redislock");
                     DLockInfo lockInfo = dlockImpl.tryLock(5000, 60000); 
                     if (lockInfo != null) {
-                        System.out.println("=========================" + lockInfo);
-                        dlockImpl.unLock(lockInfo);
+                        System.out.println("=" + lockInfo + ", delete: " + dlockImpl.unLock(lockInfo));
                     }  
                     latch.countDown();
                 }
