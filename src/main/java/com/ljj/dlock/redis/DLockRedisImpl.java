@@ -124,7 +124,8 @@ public class DLockRedisImpl implements IDLock {
                 return lock;
             } else {
                 try {
-                    Thread.sleep(200);
+                    // 等待50个毫秒
+                    Thread.sleep(50);
                 } catch (InterruptedException e) {
                 }
             }
