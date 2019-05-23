@@ -8,31 +8,31 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
-import com.ljj.dlock.DLockInfo;
-import com.ljj.dlock.IDLock;
-import com.ljj.dlock.zookeeper.DLockZKImpl;
+import com.ljj.dlock.redis.DLockRedisImpl;
 
 import junit.framework.TestCase;
 
 /**
  * Unit test for simple App.
  */
-public class DLockTest extends TestCase {
+public class DLockRedisTest extends TestCase {
     @Test
-    public void testDLockZk() {
-        int count = 20;
+    public void testDLockRedis() {
+        int count = 3;
         ExecutorService threadPool =  Executors.newFixedThreadPool(count);
-        IDLock dlockImpl = new DLockZKImpl("10.108.3.54:2181", "zk_lock");
+        
         CountDownLatch latch = new CountDownLatch(count);
         for (int i = 0; i < count; i++) {
             threadPool.execute( new Runnable(){
                 @ Override
                 public void run() {
-                    DLockInfo lockInfo = dlockImpl.lock(); 
+                    IDLock dlockImpl = new DLockRedisImpl("10.50.22.26", 13379, "ichao_redis", "redislock");
+                    DLockInfo lockInfo = dlockImpl.tryLock(5000, 60000); 
                     if (lockInfo != null) {
-                        System.out.println("=========================" + lockInfo.getLockValue());
+                        System.out.println("=========================" + lockInfo);
                         dlockImpl.unLock(lockInfo);
-                    }                    
+                    }  
+                    latch.countDown();
                 }
             });
         }

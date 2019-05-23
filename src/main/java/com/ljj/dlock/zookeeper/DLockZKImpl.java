@@ -146,11 +146,11 @@ public class DLockZKImpl implements IDLock {
 
     @ Override
     public DLockInfo lock() {
-        return tryLock(Integer.MAX_VALUE, TimeUnit.SECONDS);
+        return tryLock(Integer.MAX_VALUE, Integer.MAX_VALUE);
     }
 
     @ Override
-    public DLockInfo tryLock(int timeout, TimeUnit timeUnit) {
+    public DLockInfo tryLock(int timeout, int expire) {
         try {
             DLockInfo lock = createDLockInfo(competitorPath);
             // 获取竞争者结点列表
@@ -177,7 +177,7 @@ public class DLockZKImpl implements IDLock {
                 });
                 // 监听状态不为null，则进入等
                 if (waitNodeStat != null) {
-                    waitLocklatch.await(timeout, timeUnit);
+                    waitLocklatch.await(timeout, TimeUnit.MILLISECONDS);
                 } else {
                     waitLocklatch.countDown();
                 }
@@ -212,10 +212,11 @@ public class DLockZKImpl implements IDLock {
     }
 
     @ Override
-    public void unLock(DLockInfo lock) {
+    public boolean unLock(DLockInfo lock) {
         try {
             // TODO 此处确保高可用,如果删除异常,需要重试
             zkClient.delete(lock.getLockValue(), -1);
+            return true;
         } catch (InterruptedException e) {
             throw new LockingException("the release lock has been Interrupted ");
         } catch (KeeperException e) {

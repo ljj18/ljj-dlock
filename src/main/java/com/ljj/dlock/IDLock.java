@@ -7,7 +7,6 @@
 package com.ljj.dlock;
 
 import java.net.ConnectException;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.zookeeper.KeeperException;
 
@@ -37,7 +36,7 @@ public interface IDLock {
     DLockInfo lock();
     
     /**
-     * 尝试获得锁，能获得就立马获得锁，如果不能获得就立马返回
+     * 尝试获得锁，能获得就立马获得锁DLockInfo，如果不能获得就立马返回Null
      * 
      *      
      * @throws LockingException
@@ -50,10 +49,10 @@ public interface IDLock {
     DLockInfo tryLock();  
 
     /**
-     * 尝试获得锁，如果有锁就返回true，如果没有锁就等待，如果等待了一段时间后还没能获取到锁，那么就返回false
+     * 尝试获得锁，如果有锁就返回DLockInfo实例，如果没有锁就等待，如果等待了一段时间后还没能获取到锁，那么就返回Null
      * 
-     * @param timeout 超时时间
-     * @param timeUint 时间单位
+     * @param timeout 等待时间, 毫秒
+     * @param expire  过期时间，毫秒(Redis实现才需要老邪)
      * 
      * @throws LockingException
      * @throws ConnectException
@@ -62,7 +61,7 @@ public interface IDLock {
      *      非空,获得锁,执行业务
      *      空,没获得锁
      */
-    DLockInfo tryLock(int timeout, TimeUnit timeUint);
+    DLockInfo tryLock(int timeout, int expire);
     
     /**
      * 释放锁
@@ -73,6 +72,6 @@ public interface IDLock {
      * @throws KeeperException
      * @throws InterruptedException
      */
-    void unLock(DLockInfo lock);
+    boolean unLock(DLockInfo lock);
  
 }
