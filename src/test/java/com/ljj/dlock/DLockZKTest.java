@@ -22,7 +22,7 @@ public class DLockZKTest extends TestCase {
     public void testDLockZk() {
         int count = 20;
         ExecutorService threadPool =  Executors.newFixedThreadPool(count);
-        IDLock dlockImpl = new DLockZKImpl("47.100.40.127:21981", "zk_lock");
+        IDLock dlockImpl = new DLockZKImpl("127.0.0.7:2181", "zk_lock");
         CountDownLatch latch = new CountDownLatch(count);
         for (int i = 0; i < count; i++) {
             threadPool.execute( new Runnable(){

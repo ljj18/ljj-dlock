@@ -26,7 +26,7 @@ public class DLockRedisTest extends TestCase {
             threadPool.execute( new Runnable(){
                 @ Override
                 public void run() {
-                    IDLock dlockImpl = new DLockRedisImpl("47.100.40.127", 13379, "ichao_redis", "redislock");
+                    IDLock dlockImpl = new DLockRedisImpl("127.0.0.1", 6379, "ichao_redis", "redislock");
                     DLockInfo lockInfo = dlockImpl.tryLock(5000, 60000); 
                     if (lockInfo != null) {
                         System.out.println("=" + lockInfo + ", delete: " + dlockImpl.unLock(lockInfo));
