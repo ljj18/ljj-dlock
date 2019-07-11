@@ -30,7 +30,7 @@ import redis.clients.jedis.Jedis;
 public class DLockRedisImpl implements IDLock {
 
     /*
-     * 获取锁成功
+     *获取锁成功
      */
     private static final String LOCK_SUCCESS = "OK";
     /*
